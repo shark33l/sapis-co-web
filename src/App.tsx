@@ -1,11 +1,11 @@
 import './App.css'
-import Header from './components/header/Header'
+import ComingSoon from './components/comingSoon/ComingSoon'
 
 function App() {
 
   return (
     <>
-      <Header/>
+      <ComingSoon />
     </>
   )
 }
