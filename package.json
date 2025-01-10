@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://shark33l.github.io/sapis-co-web",
+  "homepage": "https://sapis.co",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
