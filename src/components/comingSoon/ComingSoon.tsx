@@ -14,7 +14,7 @@ function ComingSoon() {
                 <div className="absolute inset-0 bg-black opacity-50"></div>
 
                 <div className="relative z-10 justify-items-center">
-                    <img className="lg:w-[33.4vw] sm:w-[50vw] w-[40vw]" src={sapisLogo} alt="Sapis Logo"/>
+                    <img className="lg:w-[33.4vw] sm:w-[65vw] w-[40vw]" src={sapisLogo} alt="Sapis Logo"/>
                 </div>
             </div>
             <div className="h-[33.33vh] bg-dark-ui-grey flex flex-col items-center justify-center text-center">
