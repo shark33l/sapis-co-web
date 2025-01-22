@@ -1,5 +1,6 @@
 import EmailSubmission from "./EmailSubmission";
 import heroImage from '/images/coming-soon-hero-1920.jpg';
+import sapisLogo from '/Sapis_Logo_SHK.svg'
 
 function ComingSoon() {
     return (
@@ -12,9 +13,8 @@ function ComingSoon() {
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black opacity-50"></div>
 
-                <div className="relative z-10">
-                    <h1 className="text-white text-5xl font-bold mb-2">Sapis</h1>
-                    <p className="text-xl text-white">Empowering Energy Sector with Superior Infrastructure Solutions</p>
+                <div className="relative z-10 justify-items-center">
+                    <img src={sapisLogo} alt="Sapis Logo" width="450px"/>
                 </div>
             </div>
             <div className="h-[33.33vh] bg-dark-ui-grey flex flex-col items-center justify-center text-center">
