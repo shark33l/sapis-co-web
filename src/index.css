@@ -3,16 +3,33 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .nav-style {
+    @apply transition-all;
+    @apply text-gray-600;
+    @apply font-medium;
+
+    position: relative;
+
+    &::after {
+      content: "";
+      @apply absolute left-0 bottom-0 w-0 h-[2px] bg-gray-900 transition-all duration-300;
+    }
+
+    &:hover {
+      @apply text-gray-900;
+      @apply font-extrabold;
+
+      &::after {
+        content: "";
+        @apply w-full;
+      }
+    };
+  }
 }
