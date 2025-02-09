@@ -1,4 +1,11 @@
-# React + TypeScript + Vite
+# SAPIS CO SPA APP
+## React + TypeScript + Vite
+
+| Module    | Version |
+| ------    | ------- |
+| Node      | v22.12.0|
+| npm       | 10.9.0  |
+|Typescript | 5.7.3   |
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
