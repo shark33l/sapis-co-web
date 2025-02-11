@@ -10,6 +10,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@theme {
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+}
+
 @layer components {
   .nav-style {
     @apply transition-all;
@@ -20,7 +33,7 @@
 
     &::after {
       content: "";
-      @apply absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300;
+      @apply absolute left-0 bottom-0 w-0 h-[3px] md:h-[1px] bg-brand-primary transition-all duration-300;
     }
 
     &:hover,
@@ -35,3 +48,4 @@
     };
   }
 }
+

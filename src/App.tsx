@@ -1,4 +1,5 @@
 import './App.css'
+import './assets/css/animation.css'
 // import ComingSoon from './components/comingSoon/ComingSoon'
 import Layout from './components/Layout/Layout';
 

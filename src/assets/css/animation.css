@@ -1,0 +1,30 @@
+/* Animate in Animations for on load purposes */
+@keyframes animate-in-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in-appear {
+    animation: animate-in-appear 0.5s ease-in-out;
+}
+
+@keyframes blur-fade {
+    0% { 
+        opacity: 0;
+        filter: blur(16px); /* blur-lg in Tailwind is 16px */
+    }
+    100% { 
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+.blur-fade {
+    animation: blur-fade 2s ease-out;
+}
