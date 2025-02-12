@@ -33,11 +33,10 @@
 
     &::after {
       content: "";
-      @apply absolute left-0 bottom-0 w-0 h-[3px] md:h-[1px] bg-brand-primary transition-all duration-300;
+      @apply absolute left-0 bottom-0 w-0 h-[3px] md:h-[2px] bg-brand-primary transition-all duration-300;
     }
 
-    &:hover,
-    &:focus {
+    &:hover {
       @apply text-brand-primary;
       @apply font-extrabold;
 
@@ -46,6 +45,22 @@
         @apply w-full;
       }
     };
+  }
+
+  .nav-selected {
+    @apply text-brand-primary;
+    @apply font-extrabold;
+
+    &::after {
+      content: "";
+      @apply w-full;
+    }
+  }
+
+  .blur-overlay{
+    z-index: -1;
+    mask: linear-gradient(to top, transparent, black 70%);
+    backdrop-filter: blur(3px);
   }
 }
 

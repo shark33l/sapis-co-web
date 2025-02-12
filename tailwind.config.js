@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true
+    },
     fontFamily: {
       sans: ['Manrope', 'sans-serif']
     },
@@ -19,21 +22,6 @@ export default {
         'dark-ui-grey': '#121212',
         'light-nav-bg': '#F6F8F8'
       },
-      // keyframes: {
-      //   appear: {
-      //     "0%": {
-      //       opacity: "0",
-      //       filter: blur(100)
-      //     },
-      //     "100%": {
-      //       opacity: "1",
-      //       filter: blur(0)
-      //     }
-      //   }
-      // },
-      // animation: {
-      //   appear: "appear 10s ease-in",
-      // }
     },
   },
   plugins: [],

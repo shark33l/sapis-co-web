@@ -1,13 +1,15 @@
-import { NavItem } from '@/types';
+import { NavItem, SectionId } from '@/types';
 import SocialMediaIcons from '../UI/SocialMediaIcons/SocialMediaIcons';
 
 interface MobileNavProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   navItems: NavItem[];
+  handleNavClick: (e: React.MouseEvent<HTMLAnchorElement>, id: SectionId, path: string) => void;
+
 }
 
-const MobileNav: React.FC<MobileNavProps> = ({ isOpen, setIsOpen, navItems }) => {
+const MobileNav: React.FC<MobileNavProps> = ({ isOpen, setIsOpen, navItems, handleNavClick }) => {
   return (
     <div
       className={`fixed inset-0 bg-light-nav-bg transform transition-transform duration-300 ease-in-out grid grid-rows-5 ${
@@ -19,8 +21,11 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, setIsOpen, navItems }) =>
           <a
             key={item.href}
             href={item.href}
-            className="text-xl nav-style"
-            onClick={() => setIsOpen(false)}
+            className="text-xl nav-style uppercase"
+            onClick={(e) => {
+              handleNavClick(e, item.id, item.href); // Call the handleNavClick
+              setIsOpen(false); // Close the mobile menu
+            }}
           >
             {item.title}
           </a>

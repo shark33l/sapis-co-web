@@ -14,6 +14,7 @@
     animation: animate-in-appear 0.5s ease-in-out;
 }
 
+/* Blur and Fade in */
 @keyframes blur-fade {
     0% { 
         opacity: 0;
@@ -28,3 +29,30 @@
 .blur-fade {
     animation: blur-fade 2s ease-out;
 }
+
+/* Animation for the underline effect */
+@keyframes underline {
+    from {
+      width: 0;
+      left: 0;
+    }
+    to {
+      width: 100%;
+      left: 0;
+    }
+  }
+  
+  .animated-underline {
+    position: relative;
+  }
+  
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    animation: underline 1s ease-in-out forwards;
+    animation-delay: 1s;
+
+    @apply bg-brand-primary h-[2px] md:h-[3px]
+  }
