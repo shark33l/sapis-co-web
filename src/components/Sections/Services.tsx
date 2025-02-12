@@ -42,6 +42,8 @@ const Services = () => {
                                 if (index < gridDivisibleRemainder) {
                                     return (
                                         <ServicesCard
+                                            key={`service-card-${service.order}`}
+                                            id={`service-card-${service.order}`}
                                             order={service.order}
                                             title={service.title}
                                             description={service.description}
