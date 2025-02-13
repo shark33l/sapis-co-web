@@ -37,7 +37,7 @@ const Services = () => {
                 </TitleContainer>
                 <div id="services-card-container">
                     {sortedServices.length && firstRowCols !== 3 && (
-                        <div className={`grid md:grid-cols-${firstRowCols} gap-2`}>
+                        <div className={`grid md:grid-cols-6 gap-2`}>
                             {sortedServices.map((service, index) => {
                                 if (index < gridDivisibleRemainder) {
                                     return (
@@ -48,7 +48,8 @@ const Services = () => {
                                             title={service.title}
                                             description={service.description}
                                             imageUrl={service.imageUrl}
-                                            animated={hasAnimated} />
+                                            animated={hasAnimated} 
+                                            className={`col-span-${6/firstRowCols}`}/>
                                     )
                                 }
                             })}
@@ -56,7 +57,7 @@ const Services = () => {
                     )}
 
                     {sortedServices.length >= 3 && (
-                        <div className={`grid md:grid-cols-3 gap-2 mt-2`}>
+                        <div className={`grid md:grid-cols-6 gap-2 mt-2`}>
                             {sortedServices.map((service, index) => {
                                 if (index >= gridDivisibleRemainder) {
                                     return (
@@ -67,7 +68,8 @@ const Services = () => {
                                             title={service.title}
                                             description={service.description}
                                             imageUrl={service.imageUrl}
-                                            animated={hasAnimated}  />
+                                            animated={hasAnimated}  
+                                            className="col-span-2"/>
                                     )
                                 }
                             })}
