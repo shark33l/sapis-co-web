@@ -17,7 +17,7 @@ export const navItems: NavItem[] = [
   { id: 'home', title: 'Home', href: '/', order: 1 },
   { id: 'about',title: 'About Us', href: '#about', order: 2 },
   { id: 'services',title: 'Our Services', href: '#services', order: 3 },
-  { id: 'our-purpose',title: 'Our Purpose', href: '#purpose', order: 4 },
+  { id: 'our-purpose',title: 'Our Purpose', href: '#our-purpose', order: 4 },
   { id: 'contact',title: 'Contact Us', href: '#contact', order: 5 },
 ];
 

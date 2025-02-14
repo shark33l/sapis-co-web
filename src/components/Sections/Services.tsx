@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from 'react';
 
 // Custom Types
 import { SectionId } from "@/types";
@@ -9,23 +9,36 @@ import useSectionAnimationIdentifier from "../hooks/useSectionAnimationIdentifie
 // Custom Components
 import { HeaderChip, TitleContainer } from "../UI/SectionHeader/SectionHeader";
 
-import { navItems } from '../Navigation/NavBar.tsx'
-import { servicesContents as services } from '../../assets/content/ServicesContent.tsx'
+import { navItems } from '../Navigation/NavBar.tsx';
+import { servicesContents as services } from '../../assets/content/ServicesContent.tsx';
 import ServicesCard from "../UI/ServicesCard/ServicesCard.tsx";
 
 const Services = () => {
     const sectionId: SectionId = 'services';
+    const cardsContainerRef = useRef<HTMLDivElement | null>(null);
+    const [mouseCordinates, setMouseCordinates] = useState({ x: 0, y: 0 });
     const { hasAnimated } = useSectionAnimationIdentifier({
         sectionId: sectionId,
         navItems
     })
 
+    // Get Mouse Cordinates
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (!cardsContainerRef.current) return;
+
+        // Get Mouse Cordinates relative to the Service Card Container
+        const relativeX = e.clientX;
+        const relativeY = e.clientY;
+        setMouseCordinates({ x: relativeX, y: relativeY });
+      };
+
     // Variables for the grid
     // Sort services by order
     const sortedServices = [...services].sort((a, b) => a.order - b.order);
     // The Services Cards Grid will be 3 columns, so checking if the length is divisible by 3 if not the first row would have the remainder
-    const gridDivisibleRemainder = sortedServices.length % 3;
-    const firstRowCols = gridDivisibleRemainder === 0 ? 3 : gridDivisibleRemainder;
+    const defaultGridCount = 3;
+    const gridDivisibleRemainder = sortedServices.length % defaultGridCount;
+    const firstRowCols = gridDivisibleRemainder === 0 ? defaultGridCount : gridDivisibleRemainder;
 
     return (
         <section id={sectionId} data-section={sectionId}>
@@ -35,11 +48,13 @@ const Services = () => {
                         SERVICES
                     </HeaderChip>
                 </TitleContainer>
-                <div id="services-card-container">
-                    {sortedServices.length && firstRowCols !== 3 && (
+                <div id="services-card-container" ref={cardsContainerRef} onMouseMove={handleMouseMove}>
+                    {sortedServices.length && (
                         <div className={`grid md:grid-cols-6 gap-2`}>
                             {sortedServices.map((service, index) => {
-                                if (index < gridDivisibleRemainder) {
+                                    const isFirstRow = index < firstRowCols;
+                                    // If it's the first row, assign col-span based on how many items there are, else default to 1 column per card
+                                    const colSpanClass = isFirstRow ? `col-span-${Math.ceil(6 / firstRowCols)}` : `col-span-2` ;
                                     return (
                                         <ServicesCard
                                             key={`service-card-${service.order}`}
@@ -49,29 +64,9 @@ const Services = () => {
                                             description={service.description}
                                             imageUrl={service.imageUrl}
                                             animated={hasAnimated} 
-                                            className={`col-span-${6/firstRowCols}`}/>
+                                            className={colSpanClass}
+                                            mouseCordinates={mouseCordinates}/>
                                     )
-                                }
-                            })}
-                        </div>
-                    )}
-
-                    {sortedServices.length >= 3 && (
-                        <div className={`grid md:grid-cols-6 gap-2 mt-2`}>
-                            {sortedServices.map((service, index) => {
-                                if (index >= gridDivisibleRemainder) {
-                                    return (
-                                        <ServicesCard
-                                            key={`service-card-${service.order}`}
-                                            id={`service-card-${service.order}`}
-                                            order={service.order}
-                                            title={service.title}
-                                            description={service.description}
-                                            imageUrl={service.imageUrl}
-                                            animated={hasAnimated}  
-                                            className="col-span-2"/>
-                                    )
-                                }
                             })}
                         </div>
                     )}

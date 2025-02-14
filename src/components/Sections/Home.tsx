@@ -50,7 +50,7 @@ const Home = () => {
                     <img
                         src={HeroImage}
                         alt="Hero"
-                        className="w-full h-full object-cover blur-fade"
+                        className="w-full h-full object-cover fade-in"
                         onLoad={() => setIsLoaded(true)}
                     />
                 </div>

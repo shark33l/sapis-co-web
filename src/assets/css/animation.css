@@ -14,20 +14,18 @@
     animation: animate-in-appear 0.5s ease-in-out;
 }
 
-/* Blur and Fade in */
-@keyframes blur-fade {
+/* Fade in */
+@keyframes fade-in {
     0% { 
         opacity: 0;
-        filter: blur(16px); /* blur-lg in Tailwind is 16px */
     }
     100% { 
         opacity: 1;
-        filter: blur(0);
     }
 }
 
-.blur-fade {
-    animation: blur-fade 2s ease-out;
+.fade-in {
+    animation: fade-in 2s ease-out;
 }
 
 /* Animation for the underline effect */

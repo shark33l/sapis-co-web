@@ -6,6 +6,7 @@ import AboutUs from './components/Sections/AboutUs';
 
 // Components - Sections
 import Home from './components/Sections/Home'
+import OurPurpose from './components/Sections/OurPurpose';
 import Services from './components/Sections/Services';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Home />
         <AboutUs />
         <Services />
+        <OurPurpose />
       </Layout>
     </>
   )

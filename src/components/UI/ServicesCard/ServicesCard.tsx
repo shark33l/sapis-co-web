@@ -1,26 +1,44 @@
-import { CSSProperties, useState } from "react";
-import { ServicesContentInterface } from "@/assets/content/ServicesContent";
+import { CSSProperties, useEffect, useState, useRef } from "react";
+import { ServicesContentInterface    } from "@/assets/content/ServicesContent";
+
 
 export interface ServicesCardProps extends ServicesContentInterface {
     className?: string;
     style?: React.CSSProperties;
     id?: string;
     animated?: boolean;
+    mouseCordinates?:{x: number, y:number} | undefined;
 }
 
-const ServicesCard: React.FC<ServicesCardProps> = ({ order, title, description, imageUrl, className, style, id, animated }) => {
+const ServicesCard: React.FC<ServicesCardProps> = ({ order, title, description, imageUrl, className, style, id, animated, mouseCordinates }) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const cardRef = useRef<HTMLDivElement | null>(null);
+    const [relativeMouseCordinates, setRelativeMouseCordinates] = useState({x:0, y:0});
+
+
+    // Calculate mouse cordinate for gradient and shadow
+    useEffect(() => {
+        if(cardRef.current) {
+            const { left, top } = cardRef.current.getBoundingClientRect();
+            const relativeX = mouseCordinates ? mouseCordinates.x - left : 0;
+            const relativeY = mouseCordinates ? mouseCordinates.y - top : 0;
+
+            // Mouse Position
+            setRelativeMouseCordinates({ x: relativeX, y: relativeY });
+        }
+    }, [mouseCordinates])
 
     const cardDefaultStyles:CSSProperties ={
         animationDelay: `${order != null ? (order+2) * 0.25 : 0}s`,
-        animationFillMode: 'both' 
+        animationFillMode: 'both',
     }
 
     return (
         <div
             id={id}
-            className={`group relative w-full h-[500px] rounded-3xl overflow-hidden ${className} flex items-center justify-center cursor-pointer ${animated ? "animate-in-appear" : "invisible"}`}
+            className={`bg-black  group relative w-full h-[500px] rounded-3xl overflow-hidden ${className} flex items-center justify-center cursor-pointer ${animated ? "animate-in-appear" : "invisible"}`}
             style={{ ...cardDefaultStyles, ...style }}
+            ref={cardRef}
         >
             {/* Background Image */}
             <img
@@ -37,7 +55,15 @@ const ServicesCard: React.FC<ServicesCardProps> = ({ order, title, description, 
             )}
 
             {/* Dark Overlay (Default) */}
-            <div className="absolute inset-0 bg-black bg-opacity-50 transition-all duration-500 group-hover:bg-brand-primary group-hover:bg-opacity-100"></div>
+            <div className={`rounded-3xl absolute inset-0 bg-black bg-opacity-50 transition-all duration-500] group-hover:bg-brand-primary group-hover:bg-opacity-100 `}
+                ></div>
+
+            {/* Mouse Gradient Follower */}
+            <div 
+                className="m-[3px] absolute inset-0 rounded-full h-full aspect-square -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,theme(colors.brand-secondary/30)_0%,rgba(0,0,0,0)_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={relativeMouseCordinates ? { top: relativeMouseCordinates.y, left: relativeMouseCordinates.x } : {}}></div>
+
+            
 
             {/* Content */}
             <div className="absolute inset-0 grid grid-rows-9 z-10 p-10">
