@@ -64,7 +64,7 @@ const OurPurpose = () => {
                     </TitleContainer>
                     <div id="core-values-cards-container">
                         {coreValuesContent.length && (
-                            <div id="core-values-cards-grid" className="space-y-2 md:flex md:gap-2 my-10 ">
+                            <div id="core-values-cards-grid" className="space-y-2 md:space-y-0 md:flex md:gap-2 my-10 ">
                                 {coreValuesContent.map((coreValue, index) => {
 
                                     return(

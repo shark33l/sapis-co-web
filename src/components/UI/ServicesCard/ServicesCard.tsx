@@ -7,7 +7,7 @@ export interface ServicesCardProps extends ServicesContentInterface {
     style?: React.CSSProperties;
     id?: string;
     animated?: boolean;
-    mouseCordinates?:{x: number, y:number} | undefined;
+    mouseCordinates?:{x: number, y:number} | undefined | null;
 }
 
 const ServicesCard: React.FC<ServicesCardProps> = ({ order, title, description, imageUrl, className, style, id, animated, mouseCordinates }) => {

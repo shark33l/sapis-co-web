@@ -16,7 +16,10 @@ import ServicesCard from "../UI/ServicesCard/ServicesCard.tsx";
 const Services = () => {
     const sectionId: SectionId = 'services';
     const cardsContainerRef = useRef<HTMLDivElement | null>(null);
-    const [mouseCordinates, setMouseCordinates] = useState({ x: 0, y: 0 });
+    const mouseCordinatesRef = useRef<{ x: number; y: number } | null>(null);
+    const [mouseCordinates, setMouseCordinates] = useState<{ x: number; y: number } | null>(null);
+    const animationFrameRef = useRef<number | null>(null);
+
     const { hasAnimated } = useSectionAnimationIdentifier({
         sectionId: sectionId,
         navItems
@@ -26,11 +29,17 @@ const Services = () => {
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (!cardsContainerRef.current) return;
 
-        // Get Mouse Cordinates relative to the Service Card Container
-        const relativeX = e.clientX;
-        const relativeY = e.clientY;
-        setMouseCordinates({ x: relativeX, y: relativeY });
-      };
+        // Store the latest mouse position
+        mouseCordinatesRef.current = { x: e.clientX, y: e.clientY };
+
+        // Throttle updates using requestAnimationFrame
+        if (!animationFrameRef.current) {
+            animationFrameRef.current = requestAnimationFrame(() => {
+                setMouseCordinates(mouseCordinatesRef.current);
+                animationFrameRef.current = null;
+            });
+        }
+    };
 
     // Variables for the grid
     // Sort services by order
@@ -52,21 +61,21 @@ const Services = () => {
                     {sortedServices.length && (
                         <div className={`space-y-2 md:grid md:grid-cols-6 md:gap-2`}>
                             {sortedServices.map((service, index) => {
-                                    const isFirstRow = index < firstRowCols;
-                                    // If it's the first row, assign col-span based on how many items there are, else default to 1 column per card
-                                    const colSpanClass = isFirstRow ? `col-span-${Math.ceil(6 / firstRowCols)}` : `col-span-2` ;
-                                    return (
-                                        <ServicesCard
-                                            key={`service-card-${service.order}`}
-                                            id={`service-card-${service.order}`}
-                                            order={service.order}
-                                            title={service.title}
-                                            description={service.description}
-                                            imageUrl={service.imageUrl}
-                                            animated={hasAnimated} 
-                                            className={colSpanClass}
-                                            mouseCordinates={mouseCordinates}/>
-                                    )
+                                const isFirstRow = index < firstRowCols;
+                                // If it's the first row, assign col-span based on how many items there are, else default to 1 column per card
+                                const colSpanClass = isFirstRow ? `col-span-${Math.ceil(6 / firstRowCols)}` : `col-span-2`;
+                                return (
+                                    <ServicesCard
+                                        key={`service-card-${service.order}`}
+                                        id={`service-card-${service.order}`}
+                                        order={service.order}
+                                        title={service.title}
+                                        description={service.description}
+                                        imageUrl={service.imageUrl}
+                                        animated={hasAnimated}
+                                        className={colSpanClass}
+                                        mouseCordinates={mouseCordinates} />
+                                )
                             })}
                         </div>
                     )}
