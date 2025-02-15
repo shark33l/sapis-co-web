@@ -55,12 +55,12 @@ const ServicesCard: React.FC<ServicesCardProps> = ({ order, title, description, 
             )}
 
             {/* Dark Overlay (Default) */}
-            <div className={`rounded-3xl absolute inset-0 bg-black bg-opacity-50 transition-all duration-500] group-hover:bg-brand-primary group-hover:bg-opacity-100 `}
+            <div className={`rounded-3xl absolute inset-0 bg-black bg-opacity-50 transition-all duration-1000 group-hover:bg-brand-primary group-hover:bg-opacity-100 `}
                 ></div>
 
             {/* Mouse Gradient Follower */}
             <div 
-                className="m-[3px] absolute inset-0 rounded-full h-full aspect-square -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,theme(colors.brand-secondary/30)_0%,rgba(0,0,0,0)_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="m-[3px] absolute inset-0 rounded-full h-full aspect-square -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,theme(colors.brand-secondary/30)_0%,rgba(0,0,0,0)_60%)] opacity-0 transition-opacity duration-1000 group-hover:opacity-100"
                 style={relativeMouseCordinates ? { top: relativeMouseCordinates.y, left: relativeMouseCordinates.x } : {}}></div>
 
             
@@ -71,10 +71,10 @@ const ServicesCard: React.FC<ServicesCardProps> = ({ order, title, description, 
                     <p className="text-xl font-normal">{order < 10 ? `0${order}` : order}</p>
                 </div>
                 <div className="row-span-6 flex items-start justify-start pt-2">
-                    <p className="text-4xl text-white w-[40%]">{title}</p>
+                    <p className="text-white text-4xl w-[60%] md:text-2xl md:w-[100%] lg:w-[40%] lg:text-4xl">{title}</p>
                 </div>
                 <div className="row-span-2 row-start-8 flex items-end justify-start">
-                    <p className="text-sm text-white w-[75%]">{description}</p>
+                    <p className="text-sm text-white w-[75%] md:w-[100%] lg:w-[75%] transition-all duration-1000 group-hover:text-base">{description}</p>
                 </div>
             </div>
         </div>

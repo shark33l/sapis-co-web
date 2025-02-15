@@ -53,10 +53,10 @@ const HeaderChip: React.FC<HeaderChipProps> = ({ children, className, id, style,
 const HeaderTitle: React.FC<HeaderTitleProps> = ({ children, className, id, style, animated }) => (
     <div
         id={id}
-        className={`text-brand-primary mt-5 ${animated ? "animate-in-appear" : "invisible"} ${className}`}
+        className={`text-brand-primary text-center mt-5 ${animated ? "animate-in-appear" : "invisible"} ${className}`}
         style={style}
     >
-        <p className="font-light text-center text-[1.5rem] leading-[2rem] sm:text-[2rem] sm:leading-[2.4rem] md:text-[2.4rem] md:leading-[3rem] lg:text-[2.75rem] lg:leading-[3.4rem]">
+        <p className="font-light text-[1.5rem] leading-[2rem] sm:text-[2rem] sm:leading-[2.4rem] md:text-[2.4rem] md:leading-[3rem] lg:text-[2.75rem] lg:leading-[3.4rem]">
             {children}
         </p>
     </div>

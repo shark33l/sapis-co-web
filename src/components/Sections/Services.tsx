@@ -48,9 +48,9 @@ const Services = () => {
                         SERVICES
                     </HeaderChip>
                 </TitleContainer>
-                <div id="services-card-container" ref={cardsContainerRef} onMouseMove={handleMouseMove}>
+                <div id="service-cards-container" ref={cardsContainerRef} onMouseMove={handleMouseMove}>
                     {sortedServices.length && (
-                        <div className={`grid md:grid-cols-6 gap-2`}>
+                        <div className={`space-y-2 md:grid md:grid-cols-6 md:gap-2`}>
                             {sortedServices.map((service, index) => {
                                     const isFirstRow = index < firstRowCols;
                                     // If it's the first row, assign col-span based on how many items there are, else default to 1 column per card
