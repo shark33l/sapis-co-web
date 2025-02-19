@@ -42,7 +42,7 @@ const TitleContainer: React.FC<TitleContainerProps> = ({ children, className, id
 const HeaderChip: React.FC<HeaderChipProps> = ({ children, className, id, style, animated }) => (
     <div
         id={id}
-        className={`flex items-center justify-center w-[180px] h-[40px] rounded-full bg-brand-primary text-white ${animated ? "animate-in-appear" : "invisible"} ${className}`}
+        className={`flex items-center justify-center min-w-[180px] h-[40px] px-5 rounded-full bg-brand-primary text-white ${animated ? "animate-in-appear" : "invisible"} ${className}`}
         style={style}
     >
         <p className="font-semibold uppercase">{children}</p>
