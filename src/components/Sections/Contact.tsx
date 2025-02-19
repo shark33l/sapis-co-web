@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 // Custom Types
 import { SectionId } from "@/types";
 
@@ -15,7 +13,6 @@ import { navItems } from '../Navigation/NavBar.tsx';
 
 const Contact = () => {
     const sectionId: SectionId = 'contact';
-    const [activeCoreitem, setActiveCoreitem] = useState(0)
     const { hasAnimated } = useSectionAnimationIdentifier({
         sectionId: sectionId,
         navItems

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 // Custom Types
 import { SectionId } from '@/types';
+import { navItems } from '../Navigation/NavBar';
 
 interface UseScrollSpyOptions {
   offset?: number;  // Offset from the top to trigger section change
@@ -9,6 +10,7 @@ interface UseScrollSpyOptions {
 
 export const useScrollSpy = ({ offset = 400 }: UseScrollSpyOptions = {}) => {
   const [activeSection, setActiveSection] = useState<SectionId | null>(null);
+  const navitemsIdList: SectionId[] = navItems.sort((a, b) => a.order - b.order).map((navItem) => (navItem.id))
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,8 +25,18 @@ export const useScrollSpy = ({ offset = 400 }: UseScrollSpyOptions = {}) => {
         
       });
 
-      if (current) {
+      // Find page bottom
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const pageHeight = document.documentElement.scrollHeight
+
+      const isEndOfPage =  scrollPosition >= pageHeight - 1; 
+
+      if (current && !isEndOfPage) {
         setActiveSection(current.dataset.section as SectionId);
+      }
+
+      if (isEndOfPage) {
+        setActiveSection(navitemsIdList[navitemsIdList.length - 1] as SectionId)
       }
     };
 
