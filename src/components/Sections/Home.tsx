@@ -5,6 +5,7 @@ import HeroImage from '/images/home-hero.jpg'
 import LiquidScene from "../UI/Scene/LiquidScene";
 import MetallicFluidShader from "../UI/Scene/MettalicFluidShader";
 import LiquidShader from "../UI/Scene/LiquidShader";
+import OilRippleScene from "../UI/Scene/OilRippleScene";
 
 const Home = () => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -43,7 +44,8 @@ const Home = () => {
                     </div>
                     <div className="absolute inset-0 z-0 ">
                         {/* <LiquidScene className="h-full w-full"/> */}
-                        <LiquidShader className="h-full w-full" />
+                        {/* <LiquidShader className="h-full w-full" /> */}
+                        <OilRippleScene className="h-full w-full"/>
                         {/* <MetallicFluidShader className="h-full w-full" /> */}
                     </div>
                 </div>
