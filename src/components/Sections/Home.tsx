@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 
 // Assets
 import HeroImage from '/images/home-hero.jpg'
-import LiquidScene from "../UI/Scene/LiquidScene";
-import MetallicFluidShader from "../UI/Scene/MettalicFluidShader";
-import LiquidShader from "../UI/Scene/LiquidShader";
+
+// Custom Shader
 import OilRippleScene from "../UI/Scene/OilRippleScene";
 
 const Home = () => {
@@ -42,11 +41,9 @@ const Home = () => {
                             <p className='text-center text-sm md:text-[1.25rem] font-thin'>Powering the <span className='font-extrabold'>future</span> of Energy Infrastructure.</p>
                         </div>
                     </div>
+                    {/* Ripple Shader */}
                     <div className="absolute inset-0 z-0 ">
-                        {/* <LiquidScene className="h-full w-full"/> */}
-                        {/* <LiquidShader className="h-full w-full" /> */}
                         <OilRippleScene className="h-full w-full"/>
-                        {/* <MetallicFluidShader className="h-full w-full" /> */}
                     </div>
                 </div>
                 <div id="hero-right" className="flex relative bg-slate-400 rounded-3xl min-h-[350px] md:min-h-full basis-1/2 items-center justify-center overflow-hidden 

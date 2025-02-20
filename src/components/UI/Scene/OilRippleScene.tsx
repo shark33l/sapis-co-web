@@ -1,22 +1,20 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrthographicCamera, ShaderMaterial, Vector2 } from 'three';
+import { OrthographicCamera, Vector2 } from 'three';
 import * as THREE from 'three';
-import { renderFragmentShader, renderVertexShader, rippleFragmentShader, rippleVertexShader, simulationFragmentShader, simulationVertexShader } from './Shader';
+import { rippleFragmentShader, rippleVertexShader, simulationFragmentShader, simulationVertexShader } from './Shader';
 
 interface ShaderEffectProps {
-  text?: string;
-  backgroundColor?: string;
-  textColor?: string;
   className?: string;
+  isVisible: boolean;
+  geometryArgs: [number, number]; 
 }
 
 
 export const ShaderEffect: React.FC<ShaderEffectProps> = ({
-  // text = "sapis.co",
-  // backgroundColor = "#1D1C4F",
-  // textColor = "#fef4b8",
-  // className
+  // className,
+  isVisible,
+  geometryArgs
 }) => {
   const { size, gl } = useThree();
   const frame = useRef(0);
@@ -69,57 +67,6 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
 
   }, [size]);
 
-  // Create text texture
-  // const { textTexture, renderMaterial } = useMemo(() => {
-  //   const canvas = document.createElement('canvas');
-  //   canvas.width = size.width;
-  //   canvas.height = size.height;
-  //   const ctx = canvas.getContext('2d')!;
-    
-  //   ctx.fillStyle = backgroundColor;
-  //   ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-  //   const fontSize = Math.min(size.width * 0.2, size.height * 0.3);
-  //   ctx.fillStyle = textColor;
-  //   ctx.font = `bold ${fontSize}px Arial`;
-  //   ctx.textAlign = 'center';
-  //   ctx.textBaseline = 'middle';
-  //   ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-    
-  //   const texture = new THREE.CanvasTexture(canvas);
-  //   texture.minFilter = THREE.LinearFilter;
-  //   texture.magFilter = THREE.LinearFilter;
-
-  //   const renderMat = new THREE.ShaderMaterial({
-  //     uniforms: {
-  //       textureA: { value: null },
-  //       textureB: { value: texture },
-  //     },
-  //     vertexShader: renderVertexShader,
-  //     fragmentShader: renderFragmentShader,
-  //     transparent: true,
-  //   });
-
-  //   return { textTexture: texture, renderMaterial: renderMat };
-  // }, [size, backgroundColor, textColor, text]);
-
-  // const {rippleBGMaterial} = useMemo(() => {
-  //   const rippleMat = new THREE.ShaderMaterial({
-  //     uniforms: {
-  //       textureA: {value: null},
-  //       time: { value: 125.05 },
-  //       resolution: { value: new THREE.Vector2(1000, 1000) },
-  //       mouse: { value: new THREE.Vector2(100, 10) },
-  //       colorA: { value: new THREE.Color("#1D1C4F") },
-  //       colorB: { value: new THREE.Color("#0089CF") },
-  //     },
-  //     vertexShader: rippleVertexShader,
-  //     fragmentShader: rippleFragmentShader,
-  //     transparent: true,
-  //   });
-
-  //   return { rippleBGMaterial: rippleMat }
-  // },[size])
   useMemo(() => {
     rippleBGMaterial.current = new THREE.ShaderMaterial({
       uniforms: {
@@ -165,6 +112,9 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
   }, [gl]);
 
   useFrame((state) => {
+    if (!isVisible) {
+      return; // Skip frame rendering when the component is not visible
+    }
     if (!renderTargets.current || !simMesh.current || !rippleBGMaterial.current) return;
 
     const [rtA, rtB] = renderTargets.current;
@@ -181,8 +131,6 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
     gl.render(simScene.current, camera.current);
 
     // Update final render material
-    // renderMaterial.uniforms.textureA.value = rtB.texture;
-    // rippleBGMaterial.uniforms.textureA.value = rtB.texture;
     // Update ripple background material dynamically
     // Ripple Related Only
     rippleBGMaterial.current.uniforms.time.value += 0.01;
@@ -222,7 +170,7 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
 
   return (
     <mesh>
-      <planeGeometry args={[2, 2]} />
+      <planeGeometry args={geometryArgs} />
       {rippleBGMaterial.current && <primitive object={rippleBGMaterial.current} attach="material" />}
     </mesh>
   );
@@ -233,9 +181,76 @@ interface OilRippleSceneProps {
 }
 
 const OilRippleScene: React.FC<OilRippleSceneProps> = ({ className }) => {
+  const [isVisible, setIsVisible] = useState(true);
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const [geometryArgs, setGeometryArgs] = useState<[number, number]>([2, 2]);
+
+  const updateShaderAspectRatio = () => {
+    if (canvasRef.current) {
+      const width = canvasRef.current.clientWidth;
+      const height = canvasRef.current.clientHeight;
+
+      // Calculate geometry args based on aspect ratio
+      let newArgs: [number, number] = [2, 2]; // Default values
+
+      if (width > height) {
+        newArgs = [Math.round(width / height * 2), 2];
+      } else if (height > width) {
+        newArgs = [2, 2];
+      }
+
+      // Directly set the state with the new calculated values
+      setGeometryArgs(newArgs);
+    }
+  };
+
+  useEffect(() => {
+    // Initial setup to call the function when the component is mounted
+    updateShaderAspectRatio(); // Set initial aspect ratio on mount
+
+    // Resize event listener
+    const handleResize = () => {
+      updateShaderAspectRatio();
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setIsVisible(true); // Start rendering
+          } else {
+            setIsVisible(false); // Stop rendering
+          }
+        });
+      },
+      { threshold: 0.1 } // Trigger when at least 10% of the element is in view
+    );
+
+    if (canvasRef.current) {
+      observer.observe(canvasRef.current);
+    }
+
+    return () => {
+      if (canvasRef.current) {
+        observer.unobserve(canvasRef.current);
+      }
+    };
+  }, []);
+  
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative ${className}`} ref={canvasRef}>
       <Canvas
+        
         style={{
           position: 'absolute',
           top: 0,
@@ -251,7 +266,7 @@ const OilRippleScene: React.FC<OilRippleSceneProps> = ({ className }) => {
         }}
         camera={{ position: [0, 0, 1] }}
       >
-        <ShaderEffect />
+        <ShaderEffect isVisible={isVisible} geometryArgs={geometryArgs}/>
       </Canvas>
     </div>
   );
