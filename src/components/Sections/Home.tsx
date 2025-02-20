@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 
 // Assets
 import HeroImage from '/images/home-hero.jpg'
+import LiquidScene from "../UI/Scene/LiquidScene";
+import MetallicFluidShader from "../UI/Scene/MettalicFluidShader";
+import LiquidShader from "../UI/Scene/LiquidShader";
 
 const Home = () => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -20,8 +23,8 @@ const Home = () => {
             <div
                 id="HeroSection"
                 className="min-h-full flex flex-col md:flex-row items-stretch space-y-1 md:space-x-1 md:space-y-0 mx-1 py-1">
-                <div id="hero-left" className="bg-brand-primary rounded-3xl min-h-[220px] md:min-h-full basis-1/2 animate-in-appear">
-                    <div className='text-white grid grid-rows-12 p-5 min-h-[220px] md:min-h-full md:p-10'>
+                <div id="hero-left" className="relative overflow-hidden rounded-3xl min-h-[220px] md:min-h-full basis-1/2 animate-in-appear">
+                    <div className='relative text-white grid grid-rows-12 p-5 min-h-[220px] md:min-h-full md:p-10 z-10 pointer-events-none'>
                         <div className='row-span-5 flex justify-center md:justify-start'>
                             <p className='
                             font-extrabold
@@ -37,6 +40,11 @@ const Home = () => {
                         <div className='row-span-2 flex items-end justify-center'>
                             <p className='text-center text-sm md:text-[1.25rem] font-thin'>Powering the <span className='font-extrabold'>future</span> of Energy Infrastructure.</p>
                         </div>
+                    </div>
+                    <div className="absolute inset-0 z-0 ">
+                        {/* <LiquidScene className="h-full w-full"/> */}
+                        <LiquidShader className="h-full w-full" />
+                        {/* <MetallicFluidShader className="h-full w-full" /> */}
                     </div>
                 </div>
                 <div id="hero-right" className="flex relative bg-slate-400 rounded-3xl min-h-[350px] md:min-h-full basis-1/2 items-center justify-center overflow-hidden 
