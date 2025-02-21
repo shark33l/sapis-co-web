@@ -195,11 +195,10 @@ const OilRippleScene: React.FC<OilRippleSceneProps> = ({ className }) => {
 
       if (width > height) {
         newArgs = [Math.round(width / height * 2), 2];
-      } else if (height > width) {
+      } else {
         newArgs = [2, 2];
       }
 
-      // Directly set the state with the new calculated values
       setGeometryArgs(newArgs);
     }
   };
@@ -227,9 +226,9 @@ const OilRippleScene: React.FC<OilRippleSceneProps> = ({ className }) => {
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            setIsVisible(true); // Start rendering
+            setIsVisible(true); 
           } else {
-            setIsVisible(false); // Stop rendering
+            setIsVisible(false); 
           }
         });
       },
