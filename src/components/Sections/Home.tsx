@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Assets
 import HeroImage from '/images/home-hero.jpg'
@@ -8,12 +8,6 @@ import OilRippleScene from "../UI/Scene/OilRippleScene";
 
 const Home = () => {
     const [isLoaded, setIsLoaded] = useState(false);
-
-    // Simulate a 3-second loading delay
-    // useEffect(() => {
-    //     const timer = setTimeout(() => setIsLoaded(true), 3000);
-    //     return () => clearTimeout(timer); // Cleanup on unmount
-    // }, []);
 
     return (
         <section
