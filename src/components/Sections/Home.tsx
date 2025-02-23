@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // Assets
-import HeroImage from '/images/home-hero.jpg'
+import HeroImage from '/images/home-hero.webp'
 
 // Custom Shader
 import OilRippleScene from "../UI/Scene/OilRippleScene";

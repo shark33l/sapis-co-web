@@ -1,9 +1,9 @@
 // Images
-import casing_and_tubing from '/images/services/1_casing_and_tubing.jpg'
-import spare_parts from '/images/services/2_spare_parts.jpg'
-import transportation from '/images/services/3_transportation.jpg'
-import heavy_equip from '/images/services/4_heavy_equip.jpg'
-import labours_and_engineers from '/images/services/5_labours_and_engineers.jpg'
+import casing_and_tubing from '/images/services/1_casing_and_tubing.webp'
+import spare_parts from '/images/services/2_spare_parts.webp'
+import transportation from '/images/services/3_transportation.webp'
+import heavy_equip from '/images/services/4_heavy_equip.webp'
+import labours_and_engineers from '/images/services/5_labours_and_engineers.webp'
 
 export interface ServicesContentInterface {
     order: number;
