@@ -7,7 +7,7 @@ import { rippleFragmentShader, rippleVertexShader, simulationFragmentShader, sim
 interface ShaderEffectProps {
   className?: string;
   isVisible: boolean;
-  geometryArgs: [number, number]; 
+  geometryArgs: [number, number];
 }
 
 
@@ -21,13 +21,29 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
   const mouse = useRef(new Vector2());
   const simScene = useRef(new THREE.Scene());
   const simMesh = useRef<THREE.Mesh>();
+  const simmaterialUniforms = useRef({
+    textureA: { value: null },
+    mouse: { value: mouse.current },
+    resolution: { value: new Vector2(size.width, size.height) },
+    time: { value: 0 },
+    frame: { value: 0 },
+  })
   const camera = useRef(new OrthographicCamera(-1, 1, 1, -1, 0, 1));
   const renderTargets = useRef<[THREE.WebGLRenderTarget, THREE.WebGLRenderTarget]>();
 
   // Create shader material for the ripple effect
   const rippleBGMaterial = useRef<THREE.ShaderMaterial | null>(null);
+  const rippleBGUniforms = useRef({
+    textureA: { value: null },
+    time: { value: 0 },
+    resolution: { value: new THREE.Vector2(size.width, size.height) },
+    mouse: { value: new THREE.Vector2() },
+    colorA: { value: new THREE.Color("#1D1C4F") },
+    colorB: { value: new THREE.Color("#0089CF") },
+  })
   const currentMouse = useRef(new THREE.Vector2(size.width / 2, size.height / 2));
   const targetMouse = useRef(new THREE.Vector2(size.width / 2, size.height / 2));
+  
 
   // Initialize render targets and meshes
   useMemo(() => {
@@ -50,17 +66,11 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
     // Create simulation mesh
     const geometry = new THREE.PlaneGeometry(2, 2);
     const material = new THREE.ShaderMaterial({
-      uniforms: {
-        textureA: { value: null },
-        mouse: { value: mouse.current },
-        resolution: { value: new Vector2(width, height) },
-        time: { value: 0 },
-        frame: { value: 0 },
-      },
+      uniforms: simmaterialUniforms.current,
       vertexShader: simulationVertexShader,
       fragmentShader: simulationFragmentShader,
     });
-    
+
     const mesh = new THREE.Mesh(geometry, material);
     simScene.current.add(mesh);
     simMesh.current = mesh;
@@ -69,14 +79,7 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
 
   useMemo(() => {
     rippleBGMaterial.current = new THREE.ShaderMaterial({
-      uniforms: {
-        textureA: { value: null },
-        time: { value: 0 },
-        resolution: { value: new THREE.Vector2(size.width, size.height) },
-        mouse: { value: new THREE.Vector2() },
-        colorA: { value: new THREE.Color("#1D1C4F") },
-        colorB: { value: new THREE.Color("#0089CF") },
-      },
+      uniforms: rippleBGUniforms.current,
       vertexShader: rippleVertexShader,
       fragmentShader: rippleFragmentShader,
       transparent: true,
@@ -87,11 +90,11 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
     const handleMouseMove = (e: MouseEvent) => {
       const canvas = gl.domElement;
       const rect = canvas.getBoundingClientRect();
-      
+
       // Get mouse position in pixels
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
+
       // Update mouse position
       mouse.current.x = x;
       mouse.current.y = rect.height - y; // Flip Y for WebGL
@@ -144,7 +147,7 @@ export const ShaderEffect: React.FC<ShaderEffectProps> = ({
     const speed = Math.sqrt(dx * dx + dy * dy);
     // Dynamic easing function for a more organic lag
     const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3); // Cubic ease-out
-  
+
     // Map speed to an adaptive smoothing factor
     const minLerp = 0.01; // Minimum smoothness (very slow catch-up)
     const maxLerp = 0.05; // Maximum smoothness (when moving fast)
@@ -226,9 +229,9 @@ const OilRippleScene: React.FC<OilRippleSceneProps> = ({ className }) => {
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            setIsVisible(true); 
+            setIsVisible(true);
           } else {
-            setIsVisible(false); 
+            setIsVisible(false);
           }
         });
       },
@@ -245,11 +248,11 @@ const OilRippleScene: React.FC<OilRippleSceneProps> = ({ className }) => {
       }
     };
   }, []);
-  
+
   return (
     <div className={`relative ${className}`} ref={canvasRef}>
       <Canvas
-        
+
         style={{
           position: 'absolute',
           top: 0,
@@ -265,7 +268,7 @@ const OilRippleScene: React.FC<OilRippleSceneProps> = ({ className }) => {
         }}
         camera={{ position: [0, 0, 1] }}
       >
-        <ShaderEffect isVisible={isVisible} geometryArgs={geometryArgs}/>
+        <ShaderEffect isVisible={isVisible} geometryArgs={geometryArgs} />
       </Canvas>
     </div>
   );
