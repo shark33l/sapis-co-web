@@ -1,28 +1,27 @@
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+// CSS Imports
 import './App.css'
 import './assets/css/animation.css'
-// import ComingSoon from './components/comingSoon/ComingSoon'
-import Layout from './components/Layout/Layout';
 
-// Components - Sections
-import Home from './components/Sections/Home'
-import AboutUs from './components/Sections/AboutUs';
-import OurPurpose from './components/Sections/OurPurpose';
-import Services from './components/Sections/Services';
-import Contact from './components/Sections/Contact';
+// Components
+import LoadingScreen from './components/LoadingScreen/LoadingScreen';
+
+// Load it lazy
+const ComingSoon = lazy(() => import("./components/comingSoon/ComingSoon"));
+const LandingPage = lazy(() => import("./components/Layout/LandingPage"));
 
 function App() {
 
   return (
-    <>
-      <Layout>
-        <Home />
-        <AboutUs />
-        <Services />
-        <OurPurpose />
-        <Contact />
-      </Layout>
-    </>
+    <Suspense fallback={<LoadingScreen />} >
+    <Routes>
+      <Route path='/' element={<ComingSoon />} />
+      <Route path='/demo' element={<LandingPage />} />
+    </Routes>
+    </Suspense>
   )
 }
 
-export default App
+export default App;

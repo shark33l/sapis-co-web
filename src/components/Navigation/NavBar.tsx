@@ -46,9 +46,9 @@ const Navbar = () => {
     if(hash !== activeSection){
       // Change only if the section is not home, if it is home, change it to root url '/'
       if(activeSection == 'home'){
-        window.history.replaceState(null, '', '/');
+        window.history.replaceState(null, '', '/demo');
       } else {
-        window.history.replaceState(null, '', `#${activeSection}`);
+        window.history.replaceState(null, '', `/demo#${activeSection}`);
       }
     }
 
