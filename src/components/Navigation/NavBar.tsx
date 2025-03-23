@@ -45,6 +45,9 @@ const Navbar = () => {
     const hash = window.location.hash.slice(1);
     if(hash !== activeSection){
       // Change only if the section is not home, if it is home, change it to root url '/'
+      if(activeSection == null){
+        return
+      }
       if(activeSection == 'home'){
         window.history.replaceState(null, '', '/');
       } else {
@@ -53,8 +56,10 @@ const Navbar = () => {
     }
 
     // Update Page Title
-    const activeTitle = navItems.find(item => item.id === activeSection)?.title || 'Sapis';
-    document.title = activeSection !== "home" ? `Sapis |  ${activeTitle}` : `Sapis | Super Alpha Petroleum Infrastructure Services`
+    if (activeSection != null) {
+      const activeTitle = navItems.find(item => item.id === activeSection)?.title || 'Sapis';
+      document.title = activeSection !== "home" ? `Sapis |  ${activeTitle}` : `Sapis | Super Alpha Petroleum Infrastructure Services`
+    }
   }, [activeSection])
 
   // Function to handle when a Nav is clicked
