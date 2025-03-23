@@ -1,0 +1,56 @@
+/* Animate in Animations for on load purposes */
+@keyframes animate-in-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in-appear {
+    animation: animate-in-appear 0.5s ease-in-out;
+}
+
+/* Fade in */
+@keyframes fade-in {
+    0% { 
+        opacity: 0;
+    }
+    100% { 
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fade-in 1s ease-out;
+}
+
+/* Animation for the underline effect */
+@keyframes underline {
+    from {
+      width: 0;
+      left: 0;
+    }
+    to {
+      width: 100%;
+      left: 0;
+    }
+  }
+  
+  .animated-underline {
+    position: relative;
+  }
+  
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    animation: underline 0.5s ease-in-out forwards;
+    animation-delay: 1s;
+
+    @apply bg-brand-primary h-[2px] md:h-[3px]
+  }

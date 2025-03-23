@@ -2,17 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Using clip to avoid horizontal scroll in mobile */
+html, body {
+  overflow-x: clip;
+}
+
+body {
+  position: relative;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@theme {
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+}
+
+@layer components {
+  .nav-style {
+    @apply transition-all;
+    @apply text-gray-600;
+    @apply font-bold;
+
+    position: relative;
+
+    &::after {
+      content: "";
+      @apply absolute left-0 bottom-0 w-0 h-[3px] md:h-[2px] bg-brand-primary transition-all duration-300;
+    }
+
+    &:hover {
+      @apply text-brand-primary;
+      @apply font-extrabold;
+
+      &::after {
+        content: "";
+        @apply w-full;
+      }
+    };
+  }
+
+  .nav-selected {
+    @apply text-brand-primary;
+    @apply font-extrabold;
+
+    &::after {
+      content: "";
+      @apply w-full;
+    }
+  }
+
+  .blur-overlay{
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.05);
+    mask: linear-gradient(to top, transparent, black 70%);
+    backdrop-filter: blur(2px);
+    transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+  }
+}
+
