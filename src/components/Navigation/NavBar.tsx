@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { NavItem, SectionId } from '@/types';
 
@@ -25,6 +26,7 @@ const Navbar = () => {
   const offset = 200;
   const activeSection = useScrollSpy();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Handle initial URL on page load
   useEffect(() => {
@@ -43,6 +45,7 @@ const Navbar = () => {
   // Handle URL on scroll
   useEffect(() => {
     const hash = window.location.hash.slice(1);
+
     if(hash !== activeSection){
       // Change only if the section is not home, if it is home, change it to root url '/'
       if(activeSection == null){
@@ -65,7 +68,16 @@ const Navbar = () => {
   // Function to handle when a Nav is clicked
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: SectionId, path: string) => {
     e.preventDefault();
-    
+
+    // If active section is null, navigate to link without pushing as the page is different
+    if(activeSection == null) {
+      if (id === 'home') {
+        navigate('/');
+      } else {
+        navigate(`/#${id}`);
+      }
+    }
+
     if (id === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       window.history.pushState(null, '', '/');
