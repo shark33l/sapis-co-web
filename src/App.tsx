@@ -7,9 +7,9 @@ import './assets/css/animation.css'
 
 // Components
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
+import NotFoundPage from './components/Layout/NotFoundPage';
 
 // Load it lazy
-const ComingSoon = lazy(() => import("./components/comingSoon/ComingSoon"));
 const LandingPage = lazy(() => import("./components/Layout/LandingPage"));
 
 function App() {
@@ -17,8 +17,8 @@ function App() {
   return (
     <Suspense fallback={<LoadingScreen />} >
     <Routes>
-      <Route path='/' element={<ComingSoon />} />
-      <Route path='/demo' element={<LandingPage />} />
+      <Route path='/' element={<LandingPage />} />
+      <Route path='*' element={<NotFoundPage />} /> {/* This catches all unmatched routes */}
     </Routes>
     </Suspense>
   )

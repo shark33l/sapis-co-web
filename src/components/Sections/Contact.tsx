@@ -1,6 +1,9 @@
 // Custom Types
 import { SectionId } from "@/types";
 
+// Constants
+import { animationDelayConstant } from "../../constants/index.ts";
+
 // Custom hooks
 import useSectionAnimationIdentifier from "../hooks/useSectionAnimationIdentifier.tsx";
 
@@ -24,22 +27,22 @@ const Contact = () => {
                 <div id="contact-grid" className="grid grid-cols-1 md:grid-cols-2">
                     <div id="header-section">
                         <TitleContainer>
-                            <HeaderTitle className="!text-left !text-white !self-start" animated={hasAnimated} style={{ animationDelay: `${0.25 * 1}s`, animationFillMode: 'both' }}>
+                            <HeaderTitle className="!text-left !text-white !self-start" animated={hasAnimated} style={{ animationDelay: `${animationDelayConstant * 1}s`, animationFillMode: 'both' }}>
                                 Have Questions?<br/> <TitleUnderline className="after:!bg-white" animated={hasAnimated}>Let's Connect</TitleUnderline> Today.
                             </HeaderTitle>
                         </TitleContainer>
                     </div>
                     <div id="detail-section" className="m-3 md:pt-5 w-full grid">
                         <div id="detail-section-container" className="w-fit md:justify-self-center">
-                        <div id="email-section" className={`mb-5 ${hasAnimated ? "animate-in-appear" : "invisible"}`} style={{ animationDelay: `${0.25 * 4}s`, animationFillMode: 'both' }}>
+                        <div id="email-section" className={`mb-5 ${hasAnimated ? "animate-in-appear" : "invisible"}`} style={{ animationDelay: `${animationDelayConstant * 4}s`, animationFillMode: 'both' }}>
                             <p className="text-white/40 font-bold mt-6">EMAIL</p>
                             <a href="Mailto:hamad@sapis.co" className="text-lg md:text-2xl text-white mt-2">Hamad@sapis.co</a>
                         </div>
-                        <div id="phone-section" className={`mb-5 ${hasAnimated ? "animate-in-appear" : "invisible"}`} style={{ animationDelay: `${0.25 * 5}s`, animationFillMode: 'both' }}>
+                        <div id="phone-section" className={`mb-5 ${hasAnimated ? "animate-in-appear" : "invisible"}`} style={{ animationDelay: `${animationDelayConstant * 5}s`, animationFillMode: 'both' }}>
                             <p className="text-white/40 font-bold mt-2">PHONE NUMBER</p>
                             <a  href="Tel:+96558888282" className="text-lg md:text-2xl text-white mt-2">+965 58888282</a>
                         </div>
-                        <div id="address-section" className={`mb-5 ${hasAnimated ? "animate-in-appear" : "invisible"}`} style={{ animationDelay: `${0.25 * 6}s`, animationFillMode: 'both' }}>
+                        <div id="address-section" className={`mb-5 ${hasAnimated ? "animate-in-appear" : "invisible"}`} style={{ animationDelay: `${animationDelayConstant * 6}s`, animationFillMode: 'both' }}>
                             <p className="text-white/40 font-bold mt-2">ADDRESS</p>
                             <a className="text-lg md:text-2xl text-white mt-2">Building 1, Floor 6, Office 2,<br/>
                                Al Retaj Tower, Block 7, Makka Street,<br/>

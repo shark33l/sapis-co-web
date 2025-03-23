@@ -1,4 +1,4 @@
-import catalyst_logo from '/images/agents/Catalyst_Logo.avif';
+// import catalyst_logo from '/images/agents/Catalyst_Logo.avif';
 import dvs_logo from '/images/agents/DVS_Dervos_Logo.png';
 
 export interface AgentContent {
@@ -9,12 +9,12 @@ export interface AgentContent {
 }
 
 export const agentsContent: AgentContent[] = [
-    {
-        name: "Catalyst",
-        description: "Drilling Fluids and Specialty Chemicals",
-        webUrl: "https://www.catalystdrillchem.in/",
-        logoUrl: catalyst_logo
-    },
+    // {
+    //     name: "Catalyst",
+    //     description: "Drilling Fluids and Specialty Chemicals",
+    //     webUrl: "https://www.catalystdrillchem.in/",
+    //     logoUrl: catalyst_logo
+    // },
     {
         name: "DVS Dervos Valve",
         description: "Valve Manufacturer and Pipe Valves Supplier",

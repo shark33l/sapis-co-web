@@ -6,6 +6,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Using clip to avoid horizontal scroll in mobile */
+html, body {
+  overflow-x: clip;
+}
+
+body {
+  position: relative;
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;

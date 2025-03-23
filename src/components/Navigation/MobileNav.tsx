@@ -1,5 +1,5 @@
 import { NavItem, SectionId } from '@/types';
-import SocialMediaIcons from '../UI/SocialMediaIcons/SocialMediaIcons';
+// import SocialMediaIcons from '../UI/SocialMediaIcons/SocialMediaIcons';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -31,7 +31,8 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, setIsOpen, navItems, hand
           </a>
         ))}
       </div>
-      <div className='flex items-center justify-center h-full row-start-5'><SocialMediaIcons width={30} /></div>
+      {/* Social Media Icons */}
+      {/* <div className='flex items-center justify-center h-full row-start-5'><SocialMediaIcons width={30} /></div> */}
     </div>
   );
 };

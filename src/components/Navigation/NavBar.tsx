@@ -7,7 +7,7 @@ import { useScrollSpy } from '../hooks/useScrollSpy';
 
 // Custom Components
 import MobileNav from './MobileNav';
-import SocialMediaIcons from '../UI/SocialMediaIcons/SocialMediaIcons';
+// import SocialMediaIcons from '../UI/SocialMediaIcons/SocialMediaIcons';
 
 // Assets
 import sapisLogo from '/Sapis_Logo_SHK_Full.svg'
@@ -46,9 +46,9 @@ const Navbar = () => {
     if(hash !== activeSection){
       // Change only if the section is not home, if it is home, change it to root url '/'
       if(activeSection == 'home'){
-        window.history.replaceState(null, '', '/demo');
+        window.history.replaceState(null, '', '/');
       } else {
-        window.history.replaceState(null, '', `/demo#${activeSection}`);
+        window.history.replaceState(null, '', `/#${activeSection}`);
       }
     }
 
@@ -93,7 +93,8 @@ const Navbar = () => {
                 {item.title}
               </a>
             ))}
-            <SocialMediaIcons width={16}/>
+            {/* Social Media Icons */}
+            {/* <SocialMediaIcons width={16}/> */}
           </div>
 
           {/* Mobile Menu Button */}

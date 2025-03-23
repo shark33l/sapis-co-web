@@ -3,6 +3,9 @@ import { useState } from "react";
 // Custom Types
 import { SectionId } from "@/types";
 
+// Constants
+import { animationDelayConstant } from "../../constants/index.ts";
+
 // Custom hooks
 import useSectionAnimationIdentifier from "../hooks/useSectionAnimationIdentifier.tsx";
 
@@ -34,7 +37,7 @@ const OurPurpose = () => {
                         <HeaderChip animated={hasAnimated}>
                             OUR PURPOSE
                         </HeaderChip>
-                        <HeaderTitle animated={hasAnimated} style={{ animationDelay: `${0.25 * 1}s`, animationFillMode: 'both' }}>
+                        <HeaderTitle animated={hasAnimated} style={{ animationDelay: `${animationDelayConstant * 1}s`, animationFillMode: 'both' }}>
                             We <TitleUnderline animated={hasAnimated}>build with purpose,</TitleUnderline> guided by<br />vision, mission and values.
                         </HeaderTitle>
                     </TitleContainer>
@@ -49,7 +52,7 @@ const OurPurpose = () => {
                                             title={purpose.title}
                                             description={purpose.description}
                                             animated={hasAnimated}
-                                            style={{ animationDelay: `${0.25 * (3 + index)}s`, animationFillMode: 'both' }}/>
+                                            style={{ animationDelay: `${animationDelayConstant * (3 + index)}s`, animationFillMode: 'both' }}/>
                                     )
                                 })}
                             </div>
@@ -58,7 +61,7 @@ const OurPurpose = () => {
                 </div>
                 <div id="core-value-section">
                     <TitleContainer>
-                        <HeaderChip animated={hasAnimated} style={{ animationDelay: `${0.25 * 8}s`, animationFillMode: 'both'}}>
+                        <HeaderChip animated={hasAnimated} style={{ animationDelay: `${animationDelayConstant * 8}s`, animationFillMode: 'both'}}>
                             OUR CORE VALUES
                         </HeaderChip>
                     </TitleContainer>
@@ -76,7 +79,7 @@ const OurPurpose = () => {
                                             title={coreValue.title}
                                             description={coreValue.description}
                                             animated={hasAnimated}
-                                            style={{ animationDelay: `${0.25 * (2 + 9+index)}s`, animationFillMode: 'both' }}
+                                            style={{ animationDelay: `${animationDelayConstant * (2 + 9+index)}s`, animationFillMode: 'both' }}
                                             className={`transition-all duration-1000 ease-in-out w-[100%] md:w-[17%] md:hover:w-[34%] ${activeCoreitem === index && 'md:w-[34%]'}`}/>
                                     )
                                 })}

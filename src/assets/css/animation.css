@@ -25,7 +25,7 @@
 }
 
 .fade-in {
-    animation: fade-in 2s ease-out;
+    animation: fade-in 1s ease-out;
 }
 
 /* Animation for the underline effect */
@@ -49,7 +49,7 @@
     position: absolute;
     bottom: -2px;
     left: 0;
-    animation: underline 1s ease-in-out forwards;
+    animation: underline 0.5s ease-in-out forwards;
     animation-delay: 1s;
 
     @apply bg-brand-primary h-[2px] md:h-[3px]

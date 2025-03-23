@@ -1,0 +1,1 @@
+export const animationDelayConstant = 0.1;

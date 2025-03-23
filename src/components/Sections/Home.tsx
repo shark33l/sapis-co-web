@@ -16,7 +16,7 @@ const Home = () => {
             >
             <div
                 id="HeroSection"
-                className="min-h-full flex flex-col md:flex-row items-stretch space-y-1 md:space-x-1 md:space-y-0 mx-1 py-1">
+                className="min-h-full flex flex-col md:flex-row items-stretch space-y-1 md:space-x-1 md:space-y-0 px-1 py-1">
                 <div id="hero-left" className="relative overflow-hidden rounded-3xl min-h-[220px] md:min-h-full basis-1/2 animate-in-appear">
                     <div className='relative text-white grid grid-rows-12 p-5 min-h-[220px] md:min-h-full md:p-10 z-10 pointer-events-none'>
                         <div className='row-span-5 flex justify-center md:justify-start'>

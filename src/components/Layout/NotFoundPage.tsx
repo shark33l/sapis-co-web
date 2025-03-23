@@ -3,15 +3,9 @@ import Layout from './Layout';
 // Components - Others
 import SEO from '../seo/SEO';
 
-// Components - Sections
-import Home from '../Sections/Home'
-import AboutUs from '../Sections/AboutUs';
-import OurPurpose from '../Sections/OurPurpose';
-import Services from '../Sections/Services';
-import Contact from '../Sections/Contact';
-
 // Images
 import sapis_meta from '/images/meta/sapis_meta_image.jpg';
+import NotFound from '../NotFound/NotFound';
 
 function LandingPage() {
 
@@ -24,11 +18,7 @@ function LandingPage() {
         twitterImage={sapis_meta}
       />
       <Layout>
-        <Home />
-        <AboutUs />
-        <Services />
-        <OurPurpose />
-        <Contact />
+        <NotFound />
       </Layout>
     </>
   )
