@@ -1,5 +1,6 @@
 // import catalyst_logo from '/images/agents/Catalyst_Logo.avif';
 import dvs_logo from '/images/agents/DVS_Dervos_Logo.png';
+import petrostar_logo from '/images/agents/petrostar_logo.webp';
 
 export interface AgentContent {
     name: string,
@@ -20,5 +21,11 @@ export const agentsContent: AgentContent[] = [
         description: "Valve Manufacturer and Pipe Valves Supplier",
         webUrl: "https://www.dervosvalve.com/",
         logoUrl: dvs_logo
+    },
+    {
+        name: "Petrostar Automation",
+        description: "Engineering company in Oil, Power, Petrochemicals & Water Treatment.",
+        webUrl: "https://www.dervosvalve.com/",
+        logoUrl: petrostar_logo
     }
 ]
