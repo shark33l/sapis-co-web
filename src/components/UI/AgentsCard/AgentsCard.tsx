@@ -10,7 +10,7 @@ export interface AgentsCardProps extends AgentContent {
 const AgentsCard: React.FC<AgentsCardProps> = ({id, className, style, animated, name, description, webUrl, logoUrl}) => {
     return (
         <div id={id} className={`h-[150px] lg:h-[150px] border border-[brand-primary/50] rounded-3xl overflow-hidden group transition-all duration-300 ease-out hover:shadow-md ${animated? "animate-in-appear" : "invisible"} ${className}`} style={style}>
-            <a id="agents-card-grid" href={webUrl} className="h-full max-h-full grid grid-rows-[60%,40%] justify-center">
+            <a id="agents-card-grid" href={webUrl} className="h-full max-h-full grid grid-rows-[60%,40%] justify-center" target="_blank">
                 <div className="content-center justify-items-center  p-2">
                     <img src={logoUrl} alt={name} className="max-h-[70px] max-w-[180px] object-contain transition-transform ease-out duration-300 group-hover:scale-125"/>
                 </div>
