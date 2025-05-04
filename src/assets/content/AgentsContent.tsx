@@ -25,7 +25,7 @@ export const agentsContent: AgentContent[] = [
     {
         name: "Petrostar Automation",
         description: "Engineering company in Oil, Power, Petrochemicals & Water Treatment.",
-        webUrl: "https://www.dervosvalve.com/",
+        webUrl: "https://www.petrostar.it/",
         logoUrl: petrostar_logo
     }
 ]
